@@ -31,7 +31,7 @@ global dglo
 global nla
 global nlo
 
-#ジオイドデータを読込みます。事前作成したデータファイルモジュール（geoidData.py）が存在しない時は
+#ジオイドデータをインポートします。事前作成したデータファイルモジュール（geoidData.py）が存在しない時は
 #国土地理院のジオイドデータファイルから作成します。（次回以降の処理が若干早くなる）
 def getGeoidData():
     global geoid
@@ -59,10 +59,12 @@ def getGeoidData():
         dglo = misc["dglo"]
         nla = misc["nla"]
         nlo = misc["nlo"]
+    #ヘッダのdglaの有効桁数違いで地理院プログラムと微小な差異があったので、より計算値に近づける
+    dgla = math.floor(dgla * (nla - 1)) / (nla - 1)
+    dglo = math.floor(dglo * (nlo - 1)) / (nlo - 1)
 
-#
+#国土地理院のジオイドデータからPythonのデータを書きだして、次回から使えるようにします。
 def createGeoidData():
-
     global geoid
     global glamn
     global glomn
