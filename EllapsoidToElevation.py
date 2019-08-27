@@ -196,6 +196,8 @@ def convertCSV(infile, outfile):
         colstr = headers[col].lower().strip()
         if(colstr=='z'):
             altCol = col
+        elif(colstr=='alt'):
+            altCol = col
         elif(colstr=='altitude'):
             altCol = col
         elif(colstr=='z/altitude'):
