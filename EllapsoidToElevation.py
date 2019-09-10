@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-　　
 # EllapsoidToElevation
 # 
 # Read CSV that contains latitude, longitude, ellapsoid-height,
@@ -31,7 +32,7 @@ global dglo
 global nla
 global nlo
 
-#ジオイドデータをインポートします。事前作成したデータファイルモジュール（geoidData.py）が存在しない時は
+#ジオイドデータを読込みます。事前作成したデータファイルモジュール（geoidData.py）が存在しない時は
 #国土地理院のジオイドデータファイルから作成します。（次回以降の処理が若干早くなる）
 def getGeoidData():
     global geoid
@@ -41,9 +42,9 @@ def getGeoidData():
     global dglo
     global nla
     global nlo
-    if (os.path.exists(os.getcwd() + '\\geoidData.py') == False):
+    if (os.path.exists(os.path.join(os.getcwd(),'geoidData.py')) == False):
         print('国土地理院のジオイドファイルからデータファイルを作成します(初回のみ)')
-        if (os.path.exists(os.getcwd() + '\\' + GSI_GEOID_FILE_NAME) == False):
+        if (os.path.exists(os.path.join(os.getcwd(),GSI_GEOID_FILE_NAME)) == False):
             print('エラー:データファイルがありません')
             print('同じフォルダに国土地理院のジオイドファイル「' + GSI_GEOID_FILE_NAME + '」を置いてください')
             return False
@@ -72,7 +73,7 @@ def createGeoidData():
     global dglo
     global nla
     global nlo
-    f = open(os.getcwd() + '\\' + GSI_GEOID_FILE_NAME, 'r')
+    f = open(os.path.join(os.getcwd(),GSI_GEOID_FILE_NAME), 'r')
     #f = open('gsigeo2011_ver2_1.asc', 'r')
     line = f.readline()
     #  20.00000 120.00000 0.016667 0.025000 1801 1201 1 ver2.1         
@@ -155,9 +156,9 @@ def getGeoidValue(lat, lon):
     u = (lon - wlon) / (elon - wlon)
 
     Z = (1 - t) * (1 - u) * geoid[str(i)+"_"+str(j)] + (1 - t) * u * geoid[str(i)+"_"+str(j+1)] + t * (1 - u) * geoid[str(i+1)+"_"+str(j)] + t * u * geoid[str(i+1)+"_"+str(j+1)]
-    Z = Z * 10000
+    Z = Z * 100000
     Z = math.floor(Z + 0.5)
-    Z = Z / 10000
+    Z = Z / 100000
     return Z
 
 #CSVファイル中の高さ(楕円体高)カラムを標高値に置き換えて出力します
