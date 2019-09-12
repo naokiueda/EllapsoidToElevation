@@ -139,8 +139,8 @@ def getGeoidValue(lat, lon):
     global nla
     global nlo
     #囲う矩形を求める
-    j = math.floor((lon - glomn) / dglo)
-    i = math.floor((lat - glamn) / dgla)
+    j = int(math.floor((lon - glomn) / dglo))
+    i = int(math.floor((lat - glamn) / dgla))
     if( i < 0 or i >= nla or j < 0 or j >= nlo):
         #print('エラー：緯度経度が範囲外です')
         return 999.00
