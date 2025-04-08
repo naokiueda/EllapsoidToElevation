@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-　　
 # EllapsoidToElevation
+#
+# --------Since 2025/4/1, USE VERSION 2 for new Geoid format by GSI--------
 # 
 # Read CSV that contains latitude, longitude, ellapsoid-height,
 # then output to another CSV replacing ellapsoid-height with elevation.
@@ -20,7 +22,7 @@ import os
 import math
 import importlib
 
-GSI_GEOID_FILE_NAME = 'gsigeo2011_ver2_1.asc'
+GSI_GEOID_FILE_NAME = 'gsigeo2011_ver2_2.asc'
 
 #ジオイドデータはglobalで使う
 global geoid
